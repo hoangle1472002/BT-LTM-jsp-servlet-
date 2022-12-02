@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,20 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.SV;
+import model.bean.SV_Faculty;
 import model.bo.SvBO;
 
 /**
- * Servlet implementation class CheckAddSvServlet
+ * Servlet implementation class ListSvServlet
  */
-@WebServlet("/CheckAddSvServlet")
-public class CheckAddSvServlet extends HttpServlet {
+@WebServlet("/ListSvServlet")
+public class ListSvServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public SvBO svBO = new SvBO();
+	SvBO svBO = new SvBO();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckAddSvServlet() {
+    public ListSvServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +34,17 @@ public class CheckAddSvServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 	String mssv = request.getParameter("mssv");
-	        String name = request.getParameter("name");
-	        String gender = request.getParameter("gender");
-	        int id_sv_faculty = Integer.parseInt(request.getParameter("id_sv_faculty"));
-	        try {
-	        	SV sv = new SV(mssv,id_sv_faculty,name,gender);
-	   	        svBO.InsertSV(sv);
-	        }catch(Exception e) {
-	        	
-	        }
-			response.sendRedirect("ListSvServlet");
+		// TODO Auto-generated method stub
+		String textName = "";
+		List<SV_Faculty> data = new ArrayList<>();
+		data = svBO.GetAllSVByNameFaculty(textName);
+		request.setAttribute("ListSV", data);
+		RequestDispatcher rd = request.getRequestDispatcher("Search.jsp");
+		rd.forward(request, response);
+		
+		
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

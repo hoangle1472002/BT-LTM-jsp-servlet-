@@ -34,7 +34,7 @@ public class CheckLoginServlet extends HttpServlet {
 			} else {
 				request.setAttribute("message", "Welcome !");
 				request.getSession().setAttribute("user", a);
-				response.sendRedirect("Search.jsp");
+				response.sendRedirect("ListSvServlet");
 			}
 	
 		}catch(Exception e) {

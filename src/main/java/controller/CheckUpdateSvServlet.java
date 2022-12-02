@@ -39,8 +39,7 @@ public class CheckUpdateSvServlet extends HttpServlet {
 
 	        SV sv = new SV(mssv,id_sv_faculty,name,gender);
 	        svBO.UpdateSv(sv);
-	    	RequestDispatcher rd = request.getRequestDispatcher("Search.jsp");
-			rd.forward(request, response);
+			response.sendRedirect("ListSvServlet");
 	}
 
 	/**
